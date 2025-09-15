@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MandirSeva - Pooja Booking</title>
+    <!-- React and ReactDOM -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- react-big-calendar -->
+    <link href="https://cdn.jsdelivr.net/npm/react-big-calendar@1.8.1/lib/css/react-big-calendar.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/react-big-calendar@1.8.1/lib/react-big-calendar.min.js"></script>
+    <!-- Moment.js for calendar -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <style>
+        /* Tailwind CSS Output (minified, production-ready) */
+        .animate-fade-in {
+            animation: fadeIn .5s ease-in
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .bg-amber-600 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(217 119 6 / var(--tw-bg-opacity))
+        }
+
+        .bg-gray-100 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+        }
+
+        .bg-blue-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(59 130 246 / var(--tw-bg-opacity))
+        }
+
+        .bg-green-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(34 197 94 / var(--tw-bg-opacity))
+        }
+
+        .bg-red-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(239 68 68 / var(--tw-bg-opacity))
+        }
+
+        .bg-white {
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+        }
+
+        .bg-white\/80 {
+            background-color: rgba(255, 255, 255, .8)
+        }
+
+        .bg-red-900\/30 {
+            background-color: rgba(127, 29, 29, .3)
+        }
+
+        .border {
+            --tw-border-opacity: 1;
+            border-color: rgb(209 213 219 / var(--tw-border-opacity))
+        }
+
+        .border-amber-200 {
+            --tw-border-opacity: 1;
+            border-color: rgb(251 191 36 / var(--tw-border-opacity))
+        }
+
+        .border-opacity-20 {
+            --tw-border-opacity: 0.2
+        }
+
+        .rounded {
+            border-radius: .25rem
+        }
+
+        .rounded-lg {
+            border-radius: .5rem
+        }
+
+        .rounded-xl {
+            border-radius: .75rem
+        }
+
+        .border {
+            border-width: 1px
+        }
+
+        .shadow {
+            --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+            box-shadow: var(--tw-shadow)
+        }
+
+        .shadow-lg {
+            --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+            box-shadow: var(--tw-shadow)
+        }
+
+        .p-1 {
+            padding: .25rem
+        }
+
+        .p-2 {
+            padding: .5rem
+        }
+
+        .p-3 {
+            padding: .75rem
+        }
+
+        .p-4 {
+            padding: 1rem
+        }
+
+        .p-6 {
+            padding: 1.5rem
+        }
+
+        .p-8 {
+            padding: 2rem
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem
+        }
+
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem
+        }
+
+        .mt-2 {
+            margin-top: .5rem
+        }
+
+        .mt-4 {
+            margin-top: 1rem
+        }
+
+        .mt-6 {
+            margin-top: 1.5rem
+        }
+
+        .mt-10 {
+            margin-top: 2.5rem
+        }
+
+        .mr-2 {
+            margin-right: .5rem
+        }
+
+        .mr-4 {
+            margin-right: 1rem
+        }
+
+        .ml-4 {
+            margin-left: 1rem
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem
+        }
+
+        .max-w-md {
+            max-width: 28rem
+        }
+
+        .max-w-4xl {
+            max-width: 56rem
+        }
+
+        .max-w-7xl {
+            max-width: 80rem
+        }
+
+        .w-full {
+            width: 100%
+        }
+
+        .h-4 {
+            height: 1rem
+        }
+
+        .min-h-screen {
+            min-height: 100vh
+        }
+
+        .flex {
+            display: flex
+        }
+
+        .justify-between {
+            justify-content: space-between
+        }
+
+        .justify-center {
+            justify-content: center
+        }
+
+        .items-center {
+            align-items: center
+        }
+
+        .space-y-4>:not([hidden])~:not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+        }
+
+        .space-y-6>:not([hidden])~:not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(1.5rem * var(--tw-space-y-reverse))
+        }
+
+        .text-sm {
+            font-size: .875rem;
+            line-height: 1.25rem
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem
+        }
+
+        .font-bold {
+            font-weight: 700
+        }
+
+        .font-semibold {
+            font-weight: 600
+        }
+
+        .text-white {
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity))
+        }
+
+        .text-amber-400 {
+            --tw-text-opacity: 1;
+            color: rgb(251 191 36 / var(--tw-text-opacity))
+        }
+
+        .text-amber-600 {
+            --tw-text-opacity: 1;
+            color: rgb(217 119 6 / var(--tw-text-opacity))
+        }
+
+        .text-amber-700 {
+            --tw-text-opacity: 1;
+            color: rgb(180 83 9 / var(--tw-text-opacity))
+        }
+
+        .text-amber-800 {
+            --tw-text-opacity: 1;
+            color: rgb(146 64 14 / var(--tw-text-opacity))
+        }
+
+        .text-amber-900 {
+            --tw-text-opacity: 1;
+            color: rgb(120 53 15 / var(--tw-text-opacity))
+        }
+
+        .text-blue-500 {
+            --tw-text-opacity: 1;
+            color: rgb(59 130 246 / var(--tw-text-opacity))
+        }
+
+        .text-green-500 {
+            --tw-text-opacity: 1;
+            color: rgb(34 197 94 / var(--tw-text-opacity))
+        }
+
+        .text-red-400 {
+            --tw-text-opacity: 1;
+            color: rgb(248 113 113 / var(--tw-text-opacity))
+        }
+
+        .text-red-500 {
+            --tw-text-opacity: 1;
+            color: rgb(239 68 68 / var(--tw-text-opacity))
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .hover\:bg-amber-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(217 119 6 / var(--tw-bg-opacity))
+        }
+
+        .hover\:bg-blue-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(37 99 235 / var(--tw-bg-opacity))
+        }
+
+        .hover\:bg-green-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(21 128 61 / var(--tw-bg-opacity))
+        }
+
+        .hover\:bg-red-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(220 38 38 / var(--tw-bg-opacity))
+        }
+
+        .hover\:text-amber-800:hover {
+            --tw-text-opacity: 1;
+            color: rgb(146 64 14 / var(--tw-text-opacity))
+        }
+
+        .inline-block {
+            display: inline-block
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        /* Custom styles for glassmorphism and background */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-bg {
+            background-image: url('https://images.unsplash.com/photo-1596702876058-33d373c9f0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-focus {
+            transition: all 0.3s ease;
+        }
+
+        .input-focus:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/javascript">
+        const { useState, useEffect, createContext, useContext } = React;
+
+        // Auth Context for managing user state
+        const AuthContext = createContext();
+
+        // Mock API calls (replace with actual backend endpoints)
+        const api = {
+            login: async (email, password) => {
+                return new Promise((resolve) => setTimeout(() => resolve({
+                    token: 'mock-jwt-token',
+                    user: { id: '1', name: 'John Doe', email, role: 'resident', flatNumber: 'A101' }
+                }), 500));
+            },
+            register: async (name, email, password, flatNumber) => {
+                return new Promise((resolve) => setTimeout(() => resolve({ success: true }), 500));
+            },
+            forgotPassword: async (email) => {
+                return new Promise((resolve) => setTimeout(() => resolve({ success: true }), 500));
+            },
+            getBookings: async () => {
+                return new Promise((resolve) => setTimeout(() => resolve([
+                    { id: '1', userId: '1', bookingDate: new Date(2025, 9, 20), status: 'approved' },
+                    { id: '2', userId: '1', bookingDate: new Date(2025, 9, 25), status: 'pending' }
+                ]), 500));
+            },
+            createBooking: async (date) => {
+                return new Promise((resolve) => setTimeout(() => resolve({ success: true }), 500));
+            },
+            getAdminBookings: async () => {
+                return new Promise((resolve) => setTimeout(() => resolve([
+                    { id: '1', userId: '1', bookingDate: new Date(2025, 9, 20), status: 'approved', userName: 'John Doe', flatNumber: 'A101' },
+                    { id: '2', userId: '2', bookingDate: new Date(2025, 9, 25), status: 'pending', userName: 'Jane Smith', flatNumber: 'B202' }
+                ]), 500));
+            },
+            updateBooking: async (id, status) => {
+                return new Promise((resolve) => setTimeout(() => resolve({ success: true }), 500));
+            },
+            blockDate: async (date) => {
+                return new Promise((resolve) => setTimeout(() => resolve({ success: true }), 500));
+            }
+        };
+
+        // Auth Provider
+        function AuthProvider({ children }) {
+            const [user, setUser] = useState(null);
+
+            const login = async (email, password) => {
+                const response = await api.login(email, password);
+                setUser(response.user);
+                return response;
+            };
+
+            const register = async (name, email, password, flatNumber) => {
+                const response = await api.register(name, email, password, flatNumber);
+                return response;
+            };
+
+            const logout = () => setUser(null);
+
+            return React.createElement(
+                AuthContext.Provider,
+                { value: { user, login, register, logout } },
+                children
+            );
+        }
+
+        // Login Component (Enhanced with Gods Background and Styling)
+        function Login() {
+            const { login } = useContext(AuthContext);
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                try {
+                    await login(email, password);
+                } catch (err) {
+                    setError('Invalid credentials');
+                }
+            };
+
+            return React.createElement(
+                'div',
+                { className: 'login-bg' },
+                React.createElement(
+                    'div',
+                    { className: 'max-w-md w-full p-8 glass-card rounded-xl animate-fade-in' },
+                    React.createElement('h2', { className: 'text-3xl font-bold text-center text-amber-800 mb-6' }, 'MandirSeva Login'),
+                    error && React.createElement('p', { className: 'text-red-400 bg-red-900/30 p-2 rounded mb-4 text-center' }, error),
+                    React.createElement(
+                        'div',
+                        { className: 'space-y-6' },
+                        React.createElement(
+                            'div',
+                            null,
+                            React.createElement('label', { className: 'block text-amber-700 font-semibold mb-1' }, 'Email'),
+                            React.createElement('input', {
+                                type: 'email',
+                                placeholder: 'Enter your email',
+                                value: email,
+                                onChange: (e) => setEmail(e.target.value),
+                                className: 'w-full p-3 bg-white/80 border border-amber-200 rounded-lg input-focus text-amber-900 placeholder-amber-400'
+                            })
+                        ),
+                        React.createElement(
+                            'div',
+                            null,
+                            React.createElement('label', { className: 'block text-amber-700 font-semibold mb-1' }, 'Password'),
+                            React.createElement('input', {
+                                type: 'password',
+                                placeholder: 'Enter your password',
+                                value: password,
+                                onChange: (e) => setPassword(e.target.value),
+                                className: 'w-full p-3 bg-white/80 border border-amber-200 rounded-lg input-focus text-amber-900 placeholder-amber-400'
+                            })
+                        ),
+                        React.createElement('button', {
+                            onClick: handleSubmit,
+                            className: 'w-full bg-amber-600 text-white p-3 rounded-lg font-semibold btn-hover'
+                        }, 'Login'),
+                        React.createElement(
+                            'div',
+                            { className: 'flex justify-between text-sm' },
+                            React.createElement('a', { href: '#forgot-password', className: 'text-amber-600 hover:text-amber-800' }, 'Forgot Password?'),
+                            React.createElement('a', { href: '#register', className: 'text-amber-600 hover:text-amber-800' }, 'Create an Account')
+                        )
+                    )
+                )
+            );
+        }
+
+        // Register Component
+        function Register() {
+            const { register } = useContext(AuthContext);
+            const [name, setName] = useState('');
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [flatNumber, setFlatNumber] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                try {
+                    await register(name, email, password, flatNumber);
+                    window.location.hash = '';
+                } catch (err) {
+                    setError('Registration failed');
+                }
+            };
+
+            return React.createElement(
+                'div',
+                { className: 'max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg' },
+                React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'Register'),
+                error && React.createElement('p', { className: 'text-red-500' }, error),
+                React.createElement(
+                    'div',
+                    { className: 'space-y-4' },
+                    React.createElement('input', {
+                        type: 'text',
+                        placeholder: 'Name',
+                        value: name,
+                        onChange: (e) => setName(e.target.value),
+                        className: 'w-full p-2 border rounded'
+                    }),
+                    React.createElement('input', {
+                        type: 'email',
+                        placeholder: 'Email',
+                        value: email,
+                        onChange: (e) => setEmail(e.target.value),
+                        className: 'w-full p-2 border rounded'
+                    }),
+                    React.createElement('input', {
+                        type: 'password',
+                        placeholder: 'Password',
+                        value: password,
+                        onChange: (e) => setPassword(e.target.value),
+                        className: 'w-full p-2 border rounded'
+                    }),
+                    React.createElement('input', {
+                        type: 'text',
+                        placeholder: 'Flat Number',
+                        value: flatNumber,
+                        onChange: (e) => setFlatNumber(e.target.value),
+                        className: 'w-full p-2 border rounded'
+                    }),
+                    React.createElement('button', {
+                        onClick: handleSubmit,
+                        className: 'w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600'
+                    }, 'Register'),
+                    React.createElement('a', { href: '#', className: 'text-blue-500' }, 'Back to Login')
+                )
+            );
+        }
+
+        // Forgot Password Component
+        function ForgotPassword() {
+            const [email, setEmail] = useState('');
+            const [message, setMessage] = useState('');
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                try {
+                    await api.forgotPassword(email);
+                    setMessage('Password reset link sent!');
+                } catch (err) {
+                    setMessage('Error sending reset link');
+                }
+            };
+
+            return React.createElement(
+                'div',
+                { className: 'max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg' },
+                React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'Forgot Password'),
+                message && React.createElement('p', { className: message.includes('Error') ? 'text-red-500' : 'text-green-500' }, message),
+                React.createElement(
+                    'div',
+                    { className: 'space-y-4' },
+                    React.createElement('input', {
+                        type: 'email',
+                        placeholder: 'Email',
+                        value: email,
+                        onChange: (e) => setEmail(e.target.value),
+                        className: 'w-full p-2 border rounded'
+                    }),
+                    React.createElement('button', {
+                        onClick: handleSubmit,
+                        className: 'w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600'
+                    }, 'Send Reset Link'),
+                    React.createElement('a', { href: '#', className: 'text-blue-500' }, 'Back to Login')
+                )
+            );
+        }
+
+        // Calendar Component (Resident)
+        function ResidentCalendar() {
+            const [events, setEvents] = useState([]);
+            const localizer = BigCalendar.momentLocalizer(moment);
+
+            useEffect(() => {
+                const fetchBookings = async () => {
+                    const bookings = await api.getBookings();
+                    const formattedEvents = bookings.map(booking => ({
+                        title: booking.status === 'approved' ? 'Booked' : 'Pending',
+                        start: new Date(booking.bookingDate),
+                        end: new Date(booking.bookingDate),
+                        status: booking.status
+                    }));
+                    setEvents(formattedEvents);
+                };
+                fetchBookings();
+            }, []);
+
+            const handleSelectSlot = async ({ start }) => {
+                if (events.some(event => event.start.toDateString() === start.toDateString() && event.status === 'approved')) {
+                    alert('This date is already booked.');
+                    return;
+                }
+                if (window.confirm(`Book pooja for ${start.toDateString()}?`)) {
+                    await api.createBooking(start);
+                    setEvents([...events, { title: 'Pending', start, end: start, status: 'pending' }]);
+                }
+            };
+
+            const eventStyleGetter = (event) => {
+                const backgroundColor = event.status === 'approved' ? '#EF4444' : event.status === 'pending' ? '#F59E0B' : '#10B981';
+                return { style: { backgroundColor } };
+            };
+
+            return React.createElement(
+                'div',
+                { className: 'max-w-7xl mx-auto mt-10 p-6' },
+                React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'Pooja Booking Calendar'),
+                React.createElement(BigCalendar, {
+                    localizer: localizer,
+                    events: events,
+                    startAccessor: 'start',
+                    endAccessor: 'end',
+                    style: { height: 500 },
+                    selectable: true,
+                    onSelectSlot: handleSelectSlot,
+                    eventPropGetter: eventStyleGetter,
+                    views: ['month'],
+                    defaultView: 'month'
+                }),
+                React.createElement(
+                    'div',
+                    { className: 'mt-4' },
+                    React.createElement('span', { className: 'inline-block w-4 h-4 bg-green-500 mr-2' }, ''),
+                    'Available',
+                    React.createElement('span', { className: 'inline-block w-4 h-4 bg-red-500 mr-2 ml-4' }, ''),
+                    'Booked',
+                    React.createElement('span', { className: 'inline-block w-4 h-4 bg-orange-500 mr-2 ml-4' }, ''),
+                    'Pending'
+                )
+            );
+        }
+
+        // My Bookings Component (Resident)
+        function MyBookings() {
+            const [bookings, setBookings] = useState([]);
+
+            useEffect(() => {
+                const fetchBookings = async () => {
+                    const data = await api.getBookings();
+                    setBookings(data);
+                };
+                fetchBookings();
+            }, []);
+
+            return React.createElement(
+                'div',
+                { className: 'max-w-4xl mx-auto mt-10 p-6' },
+                React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'My Bookings'),
+                React.createElement(
+                    'div',
+                    { className: 'space-y-4' },
+                    bookings.map(booking => React.createElement(
+                        'div',
+                        { key: booking.id, className: 'p-4 bg-white rounded-lg shadow' },
+                        React.createElement('p', null, React.createElement('strong', null, 'Date:'), ' ', new Date(booking.bookingDate).toDateString()),
+                        React.createElement('p', null, React.createElement('strong', null, 'Status:'), ' ', booking.status)
+                    ))
+                )
+            );
+        }
+
+        // Admin Dashboard Component
+        function AdminDashboard() {
+            const [bookings, setBookings] = useState([]);
+
+            useEffect(() => {
+                const fetchBookings = async () => {
+                    const data = await api.getAdminBookings();
+                    setBookings(data);
+                };
+                fetchBookings();
+            }, []);
+
+            const handleAction = async (id, status) => {
+                await api.updateBooking(id, status);
+                setBookings(bookings.map(b => b.id === id ? { ...b, status } : b));
+            };
+
+            const handleBlockDate = async () => {
+                const date = prompt('Enter date to block (YYYY-MM-DD):');
+                if (date) {
+                    await api.blockDate(new Date(date));
+                    alert('Date blocked successfully');
+                }
+            };
+
+            return React.createElement(
+                'div',
+                { className: 'max-w-7xl mx-auto mt-10 p-6' },
+                React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'Admin Dashboard'),
+                React.createElement('button', {
+                    onClick: handleBlockDate,
+                    className: 'mb-4 bg-red-500 text-white p-2 rounded hover:bg-red-600'
+                }, 'Block a Date'),
+                React.createElement(
+                    'div',
+                    { className: 'space-y-4' },
+                    bookings.map(booking => React.createElement(
+                        'div',
+                        { key: booking.id, className: 'p-4 bg-white rounded-lg shadow' },
+                        React.createElement('p', null, React.createElement('strong', null, 'User:'), ' ', booking.userName, ' (Flat: ', booking.flatNumber, ')'),
+                        React.createElement('p', null, React.createElement('strong', null, 'Date:'), ' ', new Date(booking.bookingDate).toDateString()),
+                        React.createElement('p', null, React.createElement('strong', null, 'Status:'), ' ', booking.status),
+                        booking.status === 'pending' && React.createElement(
+                            'div',
+                            { className: 'mt-2' },
+                            React.createElement('button', {
+                                onClick: () => handleAction(booking.id, 'approved'),
+                                className: 'mr-2 bg-green-500 text-white p-1 rounded hover:bg-green-600'
+                            }, 'Approve'),
+                            React.createElement('button', {
+                                onClick: () => handleAction(booking.id, 'rejected'),
+                                className: 'bg-red-500 text-white p-1 rounded hover:bg-red-600'
+                            }, 'Reject')
+                        )
+                    ))
+                )
+            );
+        }
+
+        // Main App Component
+        function App() {
+            const { user, logout } = useContext(AuthContext);
+            const [route, setRoute] = useState(window.location.hash.slice(1) || '');
+
+            useEffect(() => {
+                const handleHashChange = () => setRoute(window.location.hash.slice(1));
+                window.addEventListener('hashchange', handleHashChange);
+                return () => window.removeEventListener('hashchange', handleHashChange);
+            }, []);
+
+            return React.createElement(
+                'div',
+                { className: 'min-h-screen bg-gray-100' },
+                user && React.createElement(
+                    'nav',
+                    { className: 'bg-blue-500 p-4 text-white flex justify-between' },
+                    React.createElement(
+                        'div',
+                        null,
+                        React.createElement('a', { href: '#calendar', className: 'mr-4' }, 'Calendar'),
+                        user.role === 'resident' && React.createElement('a', { href: '#my-bookings', className: 'mr-4' }, 'My Bookings'),
+                        user.role === 'admin' && React.createElement('a', { href: '#admin', className: 'mr-4' }, 'Admin Dashboard')
+                    ),
+                    React.createElement('button', {
+                        onClick: logout,
+                        className: 'bg-red-500 p-2 rounded hover:bg-red-600'
+                    }, 'Logout')
+                ),
+                !user && route === 'register' && React.createElement(Register),
+                !user && route === 'forgot-password' && React.createElement(ForgotPassword),
+                !user && route !== 'register' && route !== 'forgot-password' && React.createElement(Login),
+                user && user.role === 'resident' && route === 'calendar' && React.createElement(ResidentCalendar),
+                user && user.role === 'resident' && route === 'my-bookings' && React.createElement(MyBookings),
+                user && user.role === 'admin' && route === 'admin' && React.createElement(AdminDashboard)
+            );
+        }
+
+        // Render App
+        ReactDOM.render(
+            React.createElement(
+                AuthProvider,
+                null,
+                React.createElement(App)
+            ),
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
