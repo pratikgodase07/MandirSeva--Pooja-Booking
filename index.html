@@ -13,372 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/react-big-calendar@1.8.1/lib/react-big-calendar.min.js"></script>
     <!-- Moment.js for calendar -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-    <style>
-        /* Tailwind CSS Output (minified, production-ready) */
-        .animate-fade-in {
-            animation: fadeIn .5s ease-in
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(10px)
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .bg-amber-600 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(217 119 6 / var(--tw-bg-opacity))
-        }
-
-        .bg-gray-100 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(243 244 246 / var(--tw-bg-opacity))
-        }
-
-        .bg-blue-500 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(59 130 246 / var(--tw-bg-opacity))
-        }
-
-        .bg-green-500 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(34 197 94 / var(--tw-bg-opacity))
-        }
-
-        .bg-red-500 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(239 68 68 / var(--tw-bg-opacity))
-        }
-
-        .bg-white {
-            --tw-bg-opacity: 1;
-            background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-        }
-
-        .bg-white\/80 {
-            background-color: rgba(255, 255, 255, .8)
-        }
-
-        .bg-red-900\/30 {
-            background-color: rgba(127, 29, 29, .3)
-        }
-
-        .border {
-            --tw-border-opacity: 1;
-            border-color: rgb(209 213 219 / var(--tw-border-opacity))
-        }
-
-        .border-amber-200 {
-            --tw-border-opacity: 1;
-            border-color: rgb(251 191 36 / var(--tw-border-opacity))
-        }
-
-        .border-opacity-20 {
-            --tw-border-opacity: 0.2
-        }
-
-        .rounded {
-            border-radius: .25rem
-        }
-
-        .rounded-lg {
-            border-radius: .5rem
-        }
-
-        .rounded-xl {
-            border-radius: .75rem
-        }
-
-        .border {
-            border-width: 1px
-        }
-
-        .shadow {
-            --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
-            box-shadow: var(--tw-shadow)
-        }
-
-        .shadow-lg {
-            --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
-            box-shadow: var(--tw-shadow)
-        }
-
-        .p-1 {
-            padding: .25rem
-        }
-
-        .p-2 {
-            padding: .5rem
-        }
-
-        .p-3 {
-            padding: .75rem
-        }
-
-        .p-4 {
-            padding: 1rem
-        }
-
-        .p-6 {
-            padding: 1.5rem
-        }
-
-        .p-8 {
-            padding: 2rem
-        }
-
-        .px-4 {
-            padding-left: 1rem;
-            padding-right: 1rem
-        }
-
-        .py-4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem
-        }
-
-        .mt-2 {
-            margin-top: .5rem
-        }
-
-        .mt-4 {
-            margin-top: 1rem
-        }
-
-        .mt-6 {
-            margin-top: 1.5rem
-        }
-
-        .mt-10 {
-            margin-top: 2.5rem
-        }
-
-        .mr-2 {
-            margin-right: .5rem
-        }
-
-        .mr-4 {
-            margin-right: 1rem
-        }
-
-        .ml-4 {
-            margin-left: 1rem
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem
-        }
-
-        .mb-6 {
-            margin-bottom: 1.5rem
-        }
-
-        .max-w-md {
-            max-width: 28rem
-        }
-
-        .max-w-4xl {
-            max-width: 56rem
-        }
-
-        .max-w-7xl {
-            max-width: 80rem
-        }
-
-        .w-full {
-            width: 100%
-        }
-
-        .h-4 {
-            height: 1rem
-        }
-
-        .min-h-screen {
-            min-height: 100vh
-        }
-
-        .flex {
-            display: flex
-        }
-
-        .justify-between {
-            justify-content: space-between
-        }
-
-        .justify-center {
-            justify-content: center
-        }
-
-        .items-center {
-            align-items: center
-        }
-
-        .space-y-4>:not([hidden])~:not([hidden]) {
-            --tw-space-y-reverse: 0;
-            margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-            margin-bottom: calc(1rem * var(--tw-space-y-reverse))
-        }
-
-        .space-y-6>:not([hidden])~:not([hidden]) {
-            --tw-space-y-reverse: 0;
-            margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-            margin-bottom: calc(1.5rem * var(--tw-space-y-reverse))
-        }
-
-        .text-sm {
-            font-size: .875rem;
-            line-height: 1.25rem
-        }
-
-        .text-2xl {
-            font-size: 1.5rem;
-            line-height: 2rem
-        }
-
-        .text-3xl {
-            font-size: 1.875rem;
-            line-height: 2.25rem
-        }
-
-        .font-bold {
-            font-weight: 700
-        }
-
-        .font-semibold {
-            font-weight: 600
-        }
-
-        .text-white {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity))
-        }
-
-        .text-amber-400 {
-            --tw-text-opacity: 1;
-            color: rgb(251 191 36 / var(--tw-text-opacity))
-        }
-
-        .text-amber-600 {
-            --tw-text-opacity: 1;
-            color: rgb(217 119 6 / var(--tw-text-opacity))
-        }
-
-        .text-amber-700 {
-            --tw-text-opacity: 1;
-            color: rgb(180 83 9 / var(--tw-text-opacity))
-        }
-
-        .text-amber-800 {
-            --tw-text-opacity: 1;
-            color: rgb(146 64 14 / var(--tw-text-opacity))
-        }
-
-        .text-amber-900 {
-            --tw-text-opacity: 1;
-            color: rgb(120 53 15 / var(--tw-text-opacity))
-        }
-
-        .text-blue-500 {
-            --tw-text-opacity: 1;
-            color: rgb(59 130 246 / var(--tw-text-opacity))
-        }
-
-        .text-green-500 {
-            --tw-text-opacity: 1;
-            color: rgb(34 197 94 / var(--tw-text-opacity))
-        }
-
-        .text-red-400 {
-            --tw-text-opacity: 1;
-            color: rgb(248 113 113 / var(--tw-text-opacity))
-        }
-
-        .text-red-500 {
-            --tw-text-opacity: 1;
-            color: rgb(239 68 68 / var(--tw-text-opacity))
-        }
-
-        .text-center {
-            text-align: center
-        }
-
-        .hover\:bg-amber-600:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgb(217 119 6 / var(--tw-bg-opacity))
-        }
-
-        .hover\:bg-blue-600:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgb(37 99 235 / var(--tw-bg-opacity))
-        }
-
-        .hover\:bg-green-600:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgb(21 128 61 / var(--tw-bg-opacity))
-        }
-
-        .hover\:bg-red-600:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgb(220 38 38 / var(--tw-bg-opacity))
-        }
-
-        .hover\:text-amber-800:hover {
-            --tw-text-opacity: 1;
-            color: rgb(146 64 14 / var(--tw-text-opacity))
-        }
-
-        .inline-block {
-            display: inline-block
-        }
-
-        .mx-auto {
-            margin-left: auto;
-            margin-right: auto
-        }
-
-        /* Custom styles for glassmorphism and background */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-bg {
-            background-image: url('https://images.unsplash.com/photo-1596702876058-33d373c9f0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .input-focus {
-            transition: all 0.3s ease;
-        }
-
-        .input-focus:focus {
-            border-color: #f59e0b;
-            box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
-        }
-
-        .btn-hover {
-            transition: all 0.3s ease;
-        }
-
-        .btn-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -457,7 +93,7 @@
             const [password, setPassword] = useState('');
             const [error, setError] = useState('');
 
-            const handleSubmit = async (e) => {
+            const handleSubmit = async function (e) {
                 e.preventDefault();
                 try {
                     await login(email, password);
@@ -503,7 +139,7 @@
                         ),
                         React.createElement('button', {
                             onClick: handleSubmit,
-                            className: 'w-full bg-amber-600 text-white p-3 rounded-lg font-semibold btn-hover'
+                            className: 'btn-aesthetic w-full'
                         }, 'Login'),
                         React.createElement(
                             'div',
@@ -525,7 +161,7 @@
             const [flatNumber, setFlatNumber] = useState('');
             const [error, setError] = useState('');
 
-            const handleSubmit = async (e) => {
+            const handleSubmit = async function (e) {
                 e.preventDefault();
                 try {
                     await register(name, email, password, flatNumber);
@@ -573,7 +209,7 @@
                     }),
                     React.createElement('button', {
                         onClick: handleSubmit,
-                        className: 'w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600'
+                        className: 'btn-aesthetic w-full'
                     }, 'Register'),
                     React.createElement('a', { href: '#', className: 'text-blue-500' }, 'Back to Login')
                 )
@@ -585,7 +221,7 @@
             const [email, setEmail] = useState('');
             const [message, setMessage] = useState('');
 
-            const handleSubmit = async (e) => {
+            const handleSubmit = async function (e) {
                 e.preventDefault();
                 try {
                     await api.forgotPassword(email);
@@ -612,7 +248,7 @@
                     }),
                     React.createElement('button', {
                         onClick: handleSubmit,
-                        className: 'w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600'
+                        className: 'btn-aesthetic w-full'
                     }, 'Send Reset Link'),
                     React.createElement('a', { href: '#', className: 'text-blue-500' }, 'Back to Login')
                 )
@@ -625,7 +261,7 @@
             const localizer = BigCalendar.momentLocalizer(moment);
 
             useEffect(() => {
-                const fetchBookings = async () => {
+                const fetchBookings = async function () {
                     const bookings = await api.getBookings();
                     const formattedEvents = bookings.map(booking => ({
                         title: booking.status === 'approved' ? 'Booked' : 'Pending',
@@ -638,7 +274,7 @@
                 fetchBookings();
             }, []);
 
-            const handleSelectSlot = async ({ start }) => {
+            const handleSelectSlot = async function ({ start }) {
                 if (events.some(event => event.start.toDateString() === start.toDateString() && event.status === 'approved')) {
                     alert('This date is already booked.');
                     return;
@@ -688,7 +324,7 @@
             const [bookings, setBookings] = useState([]);
 
             useEffect(() => {
-                const fetchBookings = async () => {
+                const fetchBookings = async function () {
                     const data = await api.getBookings();
                     setBookings(data);
                 };
@@ -717,19 +353,19 @@
             const [bookings, setBookings] = useState([]);
 
             useEffect(() => {
-                const fetchBookings = async () => {
+                const fetchBookings = async function () {
                     const data = await api.getAdminBookings();
                     setBookings(data);
                 };
                 fetchBookings();
             }, []);
 
-            const handleAction = async (id, status) => {
+            const handleAction = async function (id, status) {
                 await api.updateBooking(id, status);
                 setBookings(bookings.map(b => b.id === id ? { ...b, status } : b));
             };
 
-            const handleBlockDate = async () => {
+            const handleBlockDate = async function () {
                 const date = prompt('Enter date to block (YYYY-MM-DD):');
                 if (date) {
                     await api.blockDate(new Date(date));
@@ -743,7 +379,7 @@
                 React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'Admin Dashboard'),
                 React.createElement('button', {
                     onClick: handleBlockDate,
-                    className: 'mb-4 bg-red-500 text-white p-2 rounded hover:bg-red-600'
+                    className: 'btn-danger mb-4'
                 }, 'Block a Date'),
                 React.createElement(
                     'div',
@@ -759,11 +395,11 @@
                             { className: 'mt-2' },
                             React.createElement('button', {
                                 onClick: () => handleAction(booking.id, 'approved'),
-                                className: 'mr-2 bg-green-500 text-white p-1 rounded hover:bg-green-600'
+                                className: 'btn-aesthetic mr-2'
                             }, 'Approve'),
                             React.createElement('button', {
                                 onClick: () => handleAction(booking.id, 'rejected'),
-                                className: 'bg-red-500 text-white p-1 rounded hover:bg-red-600'
+                                className: 'btn-danger'
                             }, 'Reject')
                         )
                     ))
@@ -797,7 +433,7 @@
                     ),
                     React.createElement('button', {
                         onClick: logout,
-                        className: 'bg-red-500 p-2 rounded hover:bg-red-600'
+                        className: 'btn-danger p-2 rounded'
                     }, 'Logout')
                 ),
                 !user && route === 'register' && React.createElement(Register),
@@ -819,6 +455,3 @@
             document.getElementById('root')
         );
     </script>
-</body>
-
-</html>
